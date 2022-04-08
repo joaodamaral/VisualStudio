@@ -7,9 +7,7 @@ float a,b,c;
 float delta(){
 
     float r;
-
     r = pow(b,2) - (4 * a * c);
-
     return r;
 }
 
@@ -34,9 +32,7 @@ float  bahskara1(){
     if (delta_valid() == true){
     
         float  x_1;
-    
         x_1 = (-b - sqrt(delta()))/(2 * a);
-
         return x_1;
     }
     else{
@@ -50,11 +46,8 @@ float  bahskara1(){
 float bahskara2(){
 
     if (delta_valid() == true){
-
     float x_2;
-
     x_2 = (-b + sqrt(delta()))/(2*a);
-
     return x_2;
 
     }
@@ -72,9 +65,6 @@ main()
     cin >> b;
     cout << "Digite o Coeficiente c \n";
     cin >> c;
-
-    
-
     cout << "As raizes sao " << bahskara1() << " e "<< bahskara2(); 
 
 
