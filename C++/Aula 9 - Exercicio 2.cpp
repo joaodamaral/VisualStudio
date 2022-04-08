@@ -11,7 +11,7 @@ do{
         cout << "Insira a primeira nota\n";
         cin >> n1;
 
-        if (n1 < 0){
+        if (n1 < 0 || n1>10){
             cout << "Nota Invalida\n";
             inv1 = 1;
         }
@@ -26,7 +26,7 @@ do{
         cout << "Insira a segunda nota\n";
         cin >> n2;
 
-        if (n2 < 0){
+        if (n2 < 0 || n2 > 10){
             cout << "Nota Invalida\n";
             inv2 = 1;
         }

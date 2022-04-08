@@ -14,6 +14,7 @@ main(){
         cout << i << " " << pow(i, 2) << " " << pow(i, 3) << endl;
         cout << i << " " << pow(i, 2) + 1 << " " << pow(i, 3) + 1 << endl;
         i++;
+        
     }while (i <= valor);
 
     /*Final dos códigos para rodar no Windows 11 Visual Studio (Previne fechamento do prompt, após fim do programa*/
