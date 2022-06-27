@@ -37,6 +37,7 @@ float  bahskara1(){
     }
     else{
         cout << "Nao possui raizes reais";
+        break;
         return 0;
     }
 
