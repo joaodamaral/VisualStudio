@@ -18,7 +18,7 @@ void cat(){
   
     cout << "Insira a inicial de um dos 5 riscos ocupacionais (FABEQ) para calcular sua incidência na RCLYR\n";
     cin >> op;
-    op = tolower(op);
+    op = tolower(op); //Determina que a variavel sempre ficará minuscula, evitando erros com inserção de caracteres em CapsLock
     cout << endl;
 
     switch (op){
