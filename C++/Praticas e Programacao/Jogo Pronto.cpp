@@ -1,25 +1,31 @@
 #include <iostream>
 using namespace std;
 
-void inicializar(int mat[][3]);          // inicializarializes the mat with 0's
-char desenha_casa(int block);         // Prints each square of the mat
-void desenha(int mat[][3]);          // desenha the mat
-void jogar(int mat[][3], int); // Play one move
-int continuar(int *mat[3]);   // Check if there is still white space
-int ganhador(int *mat[3]);        // Check if anyone won
-int cod_jogo(int mat[][3]);           // PLay an entire cod_jogo
-void placar(int, int &, int &); // desenha the placar
+void inicializar(int mat[][3]);
+char desenha_casa(int block);
+void desenha(int mat[][3]);
+void jogar(int mat[][3], int);
+int continuar(int *mat[3]);
+int ganhador(int *mat[3]);
+int cod_jogo(int mat[][3], char nome1[30], char nome2[30]);
+void placar(int, int &, int &, char nome1[30], char nome2[30]);
 
 int main()
 {
     int mat[3][3];
+    int cont=0, jogador1=0, jogador2=0, res; 
+    char nome1[30], nome2[30];
 
-    int cont=0, jogador1=0, jogador2=0, res;
+    cout << "Insira o nome do jogador 1: ";
+    cin >> nome1; 
+    cout << "Insira o nome do jogador 2: ";
+    cin >> nome2;
+
     do{
         inicializar(mat);
-        res = cod_jogo(mat);
+        res = cod_jogo(mat, nome1, nome2);
         desenha(mat);
-        placar(res, jogador1, jogador2);
+        placar(res, jogador1, jogador2, nome1, nome2);
 
         cout<<"\n Outra partida?"<<endl;
         cout<<"0. Sair"<<endl;
@@ -53,16 +59,24 @@ char desenha_casa(int block)
 
 void desenha(int mat[][3])
 {
-    cout<<endl;
-    for(int coluna=0 ; coluna<3 ; coluna++){
-        cout<<" "<< desenha_casa(mat[coluna][0]) <<" |";
-        cout<<" "<< desenha_casa(mat[coluna][1]) <<" |";
-        cout<<" "<< desenha_casa(mat[coluna][2]) <<endl;
-
-        if(coluna!=2){
-            cout<<"___ ___ ___\n"<<endl;
-        }
-    }
+    int i, j;
+	cout << "    1    2    3"<< endl;
+	cout << "    -----------"<< endl;
+	for (i=0; i < 3; i++)
+	{
+		cout << i+1 << "  |";
+		for (j=0; j < 3; j++)
+		{
+			cout<<" "<< desenha_casa(mat[i][j]) <<" |";
+            
+		}
+		cout << endl;
+		if (i<2)
+		{
+			cout << "   |-----------|" << endl;
+		}
+	}
+	cout << "    -----------" << endl;
 }
 
 void jogar(int mat[][3], int player)
@@ -100,7 +114,7 @@ int ganhador(int mat[][3])
 {
     int coluna, col, sum;
 
-    // Adding the lines
+    // Soma das Linhas
     for(coluna=0 ; coluna<3 ; coluna++){
         sum=0;
 
@@ -113,7 +127,7 @@ int ganhador(int mat[][3])
             return -1;
     }
 
-    // Adding the columns
+    // Soma das Colunas
     for(col=0 ; col<3 ; col++){
         sum=0;
 
@@ -126,7 +140,7 @@ int ganhador(int mat[][3])
             return -1;
     }
 
-    // Adding the diagonals
+    // Soma das Diagonais
     sum=0;
     for(coluna=0 ; coluna<3 ; coluna++)
         sum += mat[coluna][coluna];
@@ -144,13 +158,22 @@ int ganhador(int mat[][3])
     return 0;
 }
 
-int cod_jogo(int mat[][3])
+void jogador(int turn, char nome1[30], char nome2[30]){
+
+    if (turn%2 == 0){
+            cout << "Turno do jogador " << nome1 << endl;
+        } else{
+            cout << "Turno do jogador " << nome2 << endl;
+        }
+}
+
+int cod_jogo(int mat[][3], char nome1[30], char nome2[30])
 {
     int turn=0, cont, ganha;
-
+    
     do{
         desenha(mat);
-        cout<<"Jogador "<<1+turn%2<<endl;
+        jogador(turn, nome1, nome2);    
         jogar(mat, turn%2);
         turn++;
 
@@ -159,24 +182,24 @@ int cod_jogo(int mat[][3])
     }while(cont && !ganha);
 
     if(ganha==1){
-        cout<<"Jogador 1 ganhou!\n"<<endl;
+        cout<< nome1 <<" ganhou!\n"<<endl;
         return 1;
     }else
         if(ganha==-1){
-            cout<<"Jogador 2 ganhou!\n"<<endl;
+            cout<< nome2 <<" ganhou!\n"<<endl;
             return 2;
     }else
         cout<<"Empate\n"<<endl;
     return 0;
 }
 
-void placar(int res, int &jogador1, int &jogador2)
+void placar(int res, int &jogador1, int &jogador2, char nome1[30], char nome2[30])
 {
     if(res==1)
         jogador1++;
     if(res==2)
         jogador2++;
 
-    cout<<"Placar: "<<endl;
-    cout<<jogador1<<" x "<<jogador2<<endl;
+    cout<< "Placar: " <<endl;
+    cout<< nome1 <<"   "<< jogador1 <<" x "<< jogador2 <<"   "<< nome2 <<endl;
 }
