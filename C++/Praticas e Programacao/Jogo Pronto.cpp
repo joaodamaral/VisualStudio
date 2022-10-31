@@ -81,24 +81,24 @@ void desenha(int mat[][3])
 
 void jogar(int mat[][3], int player)
 {
-    int coluna, col, check;
+    int i, j, check;
     do{
         cout<<"Linha: ";
-        cin >>coluna;
+        cin >>i;
         cout<<"Coluna: ";
-        cin >> col;
-        coluna--; col--;
+        cin >> j;
+        i--; j--;
 
-        check = mat[coluna][col] || coluna<0 || coluna>2 || col<0 || col>2;
+        check = mat[i][j] || i<0 || i>2 || j<0 || j>2;
         if(check)
             cout<<"Essa casa não está vazia ou fora do intervalo 3x3"<<endl;
 
     }while(check);
 
     if(player==0)
-        mat[coluna][col]=1;
+        mat[i][j]=1;
     else
-        mat[coluna][col]=-1;
+        mat[i][j]=-1;
 }
 
 int continuar(int mat[][3])
@@ -112,14 +112,14 @@ int continuar(int mat[][3])
 
 int ganhador(int mat[][3])
 {
-    int coluna, col, sum;
+    int i, j, sum;
 
     // Soma das Linhas
-    for(coluna=0 ; coluna<3 ; coluna++){
+    for(i=0 ; i<3 ; i++){
         sum=0;
 
-        for(col=0 ; col<3 ; col++)
-            sum += mat[coluna][col];
+        for(j=0 ; j<3 ; j++)
+            sum += mat[i][j];
 
         if(sum==3)
             return 1;
@@ -128,11 +128,11 @@ int ganhador(int mat[][3])
     }
 
     // Soma das Colunas
-    for(col=0 ; col<3 ; col++){
+    for(j=0 ; j<3 ; j++){
         sum=0;
 
-        for(coluna=0 ; coluna<3 ; coluna++)
-            sum += mat[coluna][col];
+        for(i=0 ; i<3 ; i++)
+            sum += mat[i][j];
 
         if(sum==3)
             return 1;
@@ -142,8 +142,8 @@ int ganhador(int mat[][3])
 
     // Soma das Diagonais
     sum=0;
-    for(coluna=0 ; coluna<3 ; coluna++)
-        sum += mat[coluna][coluna];
+    for(i=0 ; i<3 ; i++)
+        sum += mat[i][i];
     if(sum==3)
         return 1;
     if(sum==-3)
